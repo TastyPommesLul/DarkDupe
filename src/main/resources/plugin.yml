@@ -1,5 +1,5 @@
 name: DarkDupe
-version: '0.0.1'
+version: '1.0'
 main: net.tastypommeslul.darkDupe.DarkDupe
 api-version: '1.21'
 prefix: DarkDupe
