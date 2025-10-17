@@ -67,7 +67,7 @@ public class DupeCommand extends Command {
         } else {
             if (BlockedItems.items.contains(currentItem)) {
                 items.add(currentItem);
-                sender.sendMessage(Component.text("Blocked item." + currentItem.getType().name()));
+                sender.sendMessage(Component.text("Blocked item. " + currentItem.getType().name()));
                 return;
             }
         }
