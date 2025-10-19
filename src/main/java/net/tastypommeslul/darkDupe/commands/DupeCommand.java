@@ -1,7 +1,6 @@
 package net.tastypommeslul.darkDupe.commands;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import net.kyori.adventure.text.Component;
 import net.tastypommeslul.darkDupe.BlockedItems;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -26,26 +25,10 @@ public class DupeCommand extends Command {
         }
         Material currentItem = player.getInventory().getItemInMainHand().getType();
         if (currentItem == Material.AIR) {
-          sender.sendMessage("You must be holding an item to dupe.");
+          sender.sendRichMessage("<yellow>You must be holding an item to dupe!");
           return false;
         }
-        boolean isShulker = currentItem == Material.SHULKER_BOX
-                || currentItem == Material.RED_SHULKER_BOX
-                || currentItem == Material.BLUE_SHULKER_BOX
-                || currentItem == Material.BLACK_SHULKER_BOX
-                || currentItem == Material.BROWN_SHULKER_BOX
-                || currentItem == Material.CYAN_SHULKER_BOX
-                || currentItem == Material.GRAY_SHULKER_BOX
-                || currentItem == Material.GREEN_SHULKER_BOX
-                || currentItem == Material.LIGHT_BLUE_SHULKER_BOX
-                || currentItem == Material.LIGHT_GRAY_SHULKER_BOX
-                || currentItem == Material.LIME_SHULKER_BOX
-                || currentItem == Material.MAGENTA_SHULKER_BOX
-                || currentItem == Material.ORANGE_SHULKER_BOX
-                || currentItem == Material.PINK_SHULKER_BOX
-                || currentItem == Material.PURPLE_SHULKER_BOX
-                || currentItem == Material.WHITE_SHULKER_BOX
-                || currentItem == Material.YELLOW_SHULKER_BOX;
+        boolean isShulker = BlockedItems.shulkers.contains(currentItem);
 
         logic(player.getInventory().getItemInMainHand(), items, player, isShulker);
 
@@ -53,27 +36,30 @@ public class DupeCommand extends Command {
         return true;
     }
 
-    void logic(ItemStack currentItem, ArrayList<Material> items, Player sender, boolean isShulker) {
-        if (isShulker) {
+    void logic(ItemStack currentItem, ArrayList<Material> items, Player sender, boolean isShulkerOrBundle) {
+        if (BlockedItems.bundles.contains(currentItem.getType())) {
+            sender.sendRichMessage("<red><bold>Bundles can't be duped.");
+            return;
+        }
+        if (isShulkerOrBundle) {
             List<ItemStack> contents = currentItem.getData(DataComponentTypes.CONTAINER).contents();
             for (ItemStack item : contents) {
-                if (BlockedItems.items.contains(item.getType())) {
+                if (BlockedItems.items.contains(item.getType()) || BlockedItems.bundles.contains(item.getType())) {
                     items.add(item.getType());
-                    sender.sendMessage(Component.text("Found blocked items in your shulker box."));
-                    sender.sendMessage(Component.text("Remove them and try again."));
+                    sender.sendRichMessage("Found blocked item in your shulker box. <red><bold>" + item.getType().name());
+                    sender.sendRichMessage("Remove them and try again.");
                     return;
                 }
             }
         } else {
             if (BlockedItems.items.contains(currentItem.getType())) {
                 items.add(currentItem.getType());
-                sender.sendMessage(Component.text("Blocked item. " + currentItem.getType().name()));
+                sender.sendRichMessage("Blocked item. <red><bold>" + currentItem.getType().name());
                 return;
             }
         }
-        sender.sendMessage(Component.text("No blocked items found."));
         sender.getInventory().addItem(currentItem);
-        sender.sendMessage(Component.text("Duping Completed."));
+        sender.sendRichMessage("<green><bold>Duping Completed.");
         items.clear();
     }
 }

@@ -1,7 +1,6 @@
 package net.tastypommeslul.darkDupe;
 
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
@@ -56,6 +55,48 @@ public final class BlockedItems {
               Material.WARD_ARMOR_TRIM_SMITHING_TEMPLATE,
               Material.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE,
               Material.WILD_ARMOR_TRIM_SMITHING_TEMPLATE,
-              Material.SPAWNER
+              Material.SPAWNER,
+              Material.PLAYER_HEAD
+      );
+
+      public static final List<Material> shulkers = List.of(
+              // Shulkers
+              Material.SHULKER_BOX,
+              Material.BLACK_SHULKER_BOX,
+              Material.BLUE_SHULKER_BOX,
+              Material.CYAN_SHULKER_BOX,
+              Material.BROWN_SHULKER_BOX,
+              Material.GRAY_SHULKER_BOX,
+              Material.GREEN_SHULKER_BOX,
+              Material.LIGHT_BLUE_SHULKER_BOX,
+              Material.LIGHT_GRAY_SHULKER_BOX,
+              Material.LIME_SHULKER_BOX,
+              Material.MAGENTA_SHULKER_BOX,
+              Material.ORANGE_SHULKER_BOX,
+              Material.PINK_SHULKER_BOX,
+              Material.PURPLE_SHULKER_BOX,
+              Material.RED_SHULKER_BOX,
+              Material.WHITE_SHULKER_BOX,
+              Material.YELLOW_SHULKER_BOX
+              // Bundles
+      );
+      public static final List<Material> bundles = List.of(
+              Material.BUNDLE,
+              Material.BLACK_BUNDLE,
+              Material.BLUE_BUNDLE,
+              Material.CYAN_BUNDLE,
+              Material.BROWN_BUNDLE,
+              Material.GRAY_BUNDLE,
+              Material.GREEN_BUNDLE,
+              Material.LIGHT_BLUE_BUNDLE,
+              Material.LIGHT_GRAY_BUNDLE,
+              Material.LIME_BUNDLE,
+              Material.MAGENTA_BUNDLE,
+              Material.ORANGE_BUNDLE,
+              Material.PINK_BUNDLE,
+              Material.PURPLE_BUNDLE,
+              Material.RED_BUNDLE,
+              Material.WHITE_BUNDLE,
+              Material.YELLOW_BUNDLE
       );
 }
